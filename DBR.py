@@ -82,11 +82,14 @@ def cavity_dip(layers,n_out,n_sub,lam0,span=2e-9,n_coarse=2001,n_fine=40001):
     Q = lam_c/fwhm
     return lam_c,fwhm,Q,Rf[k]
 
-def safe_cavity_dip(layers,n_out,n_sub,lam0,spans=(2e-9,5e-9,15e-9,40e-9,100e-9),n_coarse=501,n_fine=4001):
+def safe_cavity_dip(layers,n_out,n_sub,lam0,
+                    spans=(2e-9,5e-9,15e-9,40e-9,100e-9),
+                    n_coarse=501,n_fine=4001):
     # for the shallow dips (low N)
     for span in spans:
         try:
-            return cavity_dip(layers,n_out,n_sub,lam0,span=span,n_coarse=n_coarse,n_fine=n_fine)
+            return cavity_dip(layers,n_out,n_sub,lam0,span=span,
+                              n_coarse=n_coarse,n_fine=n_fine)
         except IndexError:
             continue
     return np.nan,np.nan,np.nan,np.nan
